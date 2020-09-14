@@ -1,17 +1,16 @@
 function eval() {
-    // Do not use eval!!!
     return;
 }
 
 function expressionCalculator(expr) {
 
-    var getArguments = function(expression, sign) {
-        var argumentsSet = [];
-        var argument = '';
-        var bracketsCount = 0;
+    let getArguments = function(expression, sign) {
+        let argumentsSet = [];
+        let argument = '';
+        let bracketsCount = 0;
           
-        for (var i = 0; i < expression.length; i++) {
-            var char = expression[i];
+        for (let i = 0; i < expression.length; i++) {
+            let char = expression[i];
             switch (char) {
                 case '(':
                     bracketsCount++;
@@ -30,16 +29,16 @@ function expressionCalculator(expr) {
             argument += char;
         }
 
-        if (bracketsCouner) {
+        if (bracketsCount) {
                 throw new Error('ExpressionError: Brackets must be paired');
             }
             argumentsSet.push(argument);
             return argumentsSet;
     }
 
-    var add = function(expression) {
-        var result = 0;
-        var argumentsArr = getArguments(expression, '+');
+    let add = function(expression) {
+        let result = 0;
+        let argumentsArr = getArguments(expression, '+');
 
         argumentsArr = argumentsArr.map( 
             function(item) {
@@ -48,17 +47,17 @@ function expressionCalculator(expr) {
         );
 
         result = argumentsArr.reduce( 
-            function(previousValue, currentValue) {
-                return +previousValue + (+currentValue);
+            function(prevVal, currentVal) {
+                return +prevVal + (+currentVal);
             }
         );
 
         return result;
     }
 
-    var subtract = function(expression) {
-        var result = 0;
-        var argumentsArr = getArguments(expression, '-');
+    let subtract = function(expression) {
+        let result = 0;
+        let argumentsArr = getArguments(expression, '-');
         
         argumentsArr = argumentsArr.map( 
             function(item) {
@@ -67,16 +66,16 @@ function expressionCalculator(expr) {
         );
 
         result = argumentsArr.reduce( 
-            function(previousValue, currentValue) {
-                return previousValue - currentValue;
+            function(prevVal, currentVal) {
+                return prevVal - currentVal;
             }
         );
         return result;
     }
 
-    var multiply = function(expression) {
-        var result = 0;
-        var argumentsArr = getArguments(expression, '*');
+    let multiply = function(expression) {
+        let result = 0;
+        let argumentsArr = getArguments(expression, '*');
 
         argumentsArr = argumentsArr.map( 
             function(item) {
@@ -85,16 +84,16 @@ function expressionCalculator(expr) {
         );
 
         result = argumentsArr.reduce( 
-            function(previousValue, currentValue) {
-                return previousValue * currentValue;
+            function(prevVal, currentVal) {
+                return prevVal * currentVal;
             }
         );
         return result;
     }
 
-    var divide = function(expression) {
-        var result = 0;
-        var argumentsArr = getArguments(expression, '/');
+    let divide = function(expression) {
+        let result = 0;
+        let argumentsArr = getArguments(expression, '/');
 
         argumentsArr = argumentsArr.map( 
             function(item) {
@@ -107,11 +106,11 @@ function expressionCalculator(expr) {
         );
                 
         result = argumentsArr.reduce( 
-            function(previousValue, currentValue) {
-                if (currentValue === '0') {
+            function(prevVal, currentVal) {
+                if (currentVal === '0') {
                     throw new Error('TypeError: Division by zero.');
                 }
-                return previousValue / currentValue;
+                return prevVal / currentVal;
             }
         );
         return result;
